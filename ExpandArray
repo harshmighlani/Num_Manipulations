@@ -1,0 +1,26 @@
+public class ExpandArray {
+
+	public static void main(String[] args) {
+		
+		expandSeq("a3b2c1d5e0");
+	}
+	private static void expandSeq(String testStr)
+	{
+		char[] arr = testStr.toCharArray();
+		
+		StringBuilder str = new StringBuilder();
+		for(int i=1;i<arr.length;i=i+2)
+		{
+			if(i%2 !=0 && Character.isDigit(arr[i]) && !Character.isDigit(arr[i-1]))
+			{
+				int c = Character.getNumericValue(arr[i]);
+				for(int j=0;j<c;j++)
+				{
+					str.append(arr[i-1]);
+				}
+			}
+		}
+		System.out.println(str.toString());
+		
+	}
+}
