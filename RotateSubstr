@@ -1,0 +1,27 @@
+package strTest;
+
+public class IfExistsStr {
+
+	public static void main(String[] args) {
+		
+		System.out.println(checkExists("rotation","tionrota"));
+	}
+	
+	private static boolean checkExists(String str1, String str2)
+	{
+		if(str1.length()!=str2.length()){return false;}
+		
+		for(int i=0;i<str1.length();i++)
+		{
+			if((str1.substring(i, str1.length())+str1.substring(0,i)).equals(str2))
+			{
+				return true;
+			}
+		}
+		
+		//  String str = string1 + string1;
+		//  return str.contains(string2) && string1.length() == string2.length();
+		
+		return false;
+	}
+}
