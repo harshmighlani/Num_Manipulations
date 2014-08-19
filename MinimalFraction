@@ -1,0 +1,41 @@
+package calNum;
+
+public class MinimalFraction {
+
+	public static void main(String[] args) {
+		System.out.println(calMin(1331, 13));
+		
+	}
+	private static String calMin(int numerator, int denomenator)
+	{
+		int num = numerator;
+		int den = denomenator;
+		
+		while(num%den == 0 && den!=1)
+		{
+			num = num/den;
+			den = 1;
+			return new String(num +"/"+den);
+		}
+		for(int i=2;i<den/2;)
+		{
+			while(num%i == 0 && den%i ==0)
+			{
+				num = num/i;
+				den = den/i;
+			}
+			if(den ==1)
+			{
+				return new String(num +"/"+den);
+			}
+			i++;
+			
+			if(denomenator  ==  den)
+			{
+				return new String(num +"/"+den);
+			}
+		}
+		return new String(num +"/"+den);
+	}
+
+}
