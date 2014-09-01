@@ -1,0 +1,51 @@
+package calNum;
+
+public class Ce1 {
+
+	public static void main(String[] args) {
+		bigPalinUnder1000();
+	}
+	
+	private static void bigPalinUnder1000()
+	{
+		for(int i=1000;i>0;i--)
+		{
+			if(checkPrime(i) && checkPalin(i))
+			{
+				System.out.println(i +"<- Prime & Palin");
+				break;
+			}
+			continue;
+		}
+	}
+	
+	private static boolean checkPrime(int check)
+	{
+		for(int i=2;i<check/2;i++)
+		{
+			if(check%i == 0)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private static boolean checkPalin(int num)
+	{
+		int rmd;
+		int rev =0;
+		int n=num;
+		while(num > 0) 
+	       { 
+	         rmd = num % 10; 
+	         rev = rev * 10 + rmd; 
+	         num = num / 10; 
+	       } 
+		if(n == rev)
+		{
+			return true;
+		}
+		return false;
+	}
+}
