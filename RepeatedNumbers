@@ -1,0 +1,40 @@
+package calNum;
+
+import java.util.HashSet;
+import java.util.Set;
+
+
+public class RepeatedNumbers {
+
+	public static void main(String[] args) {
+
+		int testArray[]= new int[]{1,2,3,4,4,5,6,7,7,8,9};
+		testCommon(testArray);
+	}
+	private static void testCommon(int[] test)
+	{
+		Set<Integer> setInt = new HashSet<Integer>();
+
+		int[] duplicates = new int[test.length];
+
+		int i=0;
+
+		for(int tmp : test)
+		{
+			if(!setInt.add(tmp))
+			{
+				duplicates[i] = tmp;
+				i++;
+
+			}
+		}
+
+		for(int x : duplicates)
+		{
+			if(x!=0)
+			{
+				System.out.println(x);
+			}
+		}
+	}
+}
