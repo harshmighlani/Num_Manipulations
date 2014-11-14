@@ -1,0 +1,41 @@
+
+public class StockProfitCalc {
+
+
+	public static void main(String[] args) {
+
+		checkFromArray(new int[]{100, 180, 260, 310, 40, 535, 695});
+	}
+	private static void checkFromArray(int[] priceDay)
+	{
+		int dayBuy = 0;
+		int daySell = 1;
+
+		int localProfit= 0;
+		while(dayBuy!=daySell && dayBuy<priceDay.length && daySell<priceDay.length)
+		{
+			if(daySell>dayBuy)
+			{
+				if(priceDay[daySell]<priceDay[dayBuy])
+				{
+					dayBuy++;daySell++;
+					continue;
+				}
+				else
+				{
+					if(daySell == priceDay.length-1)
+					{
+						++dayBuy;
+						daySell =dayBuy+1;
+					}
+					if(localProfit<priceDay[daySell] - priceDay[dayBuy])
+					{
+						localProfit = priceDay[daySell] - priceDay[dayBuy];
+					}
+					daySell++;
+				}
+			}
+			System.out.println("Local Profit :  "+ localProfit + "  buy on : "+ dayBuy + " day Sell : "+daySell);
+		}
+	}
+}
