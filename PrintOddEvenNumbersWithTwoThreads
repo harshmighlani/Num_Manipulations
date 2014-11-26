@@ -1,0 +1,84 @@
+
+public class PrintOddEvenNumbersWithTwoThreads {
+	final static Object lock  = new Object();
+
+	public static void main(String[] args) {
+		EvenThread even = new EvenThread();
+		OddThread odd = new OddThread();
+		Thread evenThread = new Thread(even);
+		Thread oddThread = new Thread(odd);
+		evenThread.start();
+		oddThread.start();
+	}
+
+
+}
+class EvenThread implements Runnable
+{
+	private int maxNumber = 0;
+
+
+	@Override
+	public void run() {
+		while(maxNumber<=10)
+		{
+			if(maxNumber%2==0)
+			{
+				System.out.println(maxNumber + " printed");
+				maxNumber = maxNumber+2;
+				synchronized (PrintOddEvenNumbersWithTwoThreads.lock) {
+					PrintOddEvenNumbersWithTwoThreads.lock.notifyAll();
+				}
+			}
+			else
+			{
+				synchronized (PrintOddEvenNumbersWithTwoThreads.lock) {
+					try {
+						this.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+	}
+
+}
+
+class OddThread implements Runnable
+{
+	private int maxNumber=1;
+
+	@Override
+	public void run() {
+		while(maxNumber<=10)
+		{
+			if(maxNumber%2!=0)
+			{
+				System.out.println(maxNumber + " printed");
+
+				maxNumber = maxNumber+2;
+				synchronized (PrintOddEvenNumbersWithTwoThreads.lock) {
+
+					PrintOddEvenNumbersWithTwoThreads.lock.notify();
+				}
+			}
+			else
+			{
+				synchronized (PrintOddEvenNumbersWithTwoThreads.lock) {
+
+					try {
+						this.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+	}
+
+}
